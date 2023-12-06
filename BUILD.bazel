@@ -27,6 +27,13 @@ config_setting(
 )
 
 config_setting(
+    name = "darwin_arm64",
+    constraint_values = [
+        "@platforms//os:macos",
+        "@platforms//cpu:arm64",
+    ],
+)
+config_setting(
     name = "linux_x86_64",
     constraint_values = [
         "@platforms//os:linux",
@@ -46,6 +53,7 @@ alias(
     name = "shellcheck",
     actual = select(
         {
+            ":darwin_arm64": "@shellcheck_darwin_aarch64//:shellcheck",
             ":darwin_x86_64": "@shellcheck_darwin_amd64//:shellcheck",
             ":linux_aarch64": "@shellcheck_linux_arm64//:shellcheck",
             ":linux_x86_64": "@shellcheck_linux_amd64//:shellcheck",

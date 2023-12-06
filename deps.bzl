@@ -30,6 +30,14 @@ def shellcheck_dependencies():
         "linux_arm64": "179c579ef3481317d130adebede74a34dbbc2df961a70916dd4039ebf0735fae",
     }
 
+    # pull darwin_aarch64 binaries from vscode-shellcheck/shellcheck-binaries
+    maybe(http_archive,
+        name = "shellcheck_darwin_aarch64",
+        build_file_content = 'exports_files(["shellcheck"])',
+        sha256 = "a75b912015aaa5b2a48698b63f3619783d90abda4d32a31362209315e6c1cdf6",
+        url = "https://github.com/vscode-shellcheck/shellcheck-binaries/releases/download/{version}/shellcheck-{version}.darwin.aarch64.tar.gz".format(version = version)
+    )
+
     for arch, sha256 in sha256.items():
         maybe(
             http_archive,
